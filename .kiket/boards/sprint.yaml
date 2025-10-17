@@ -1,0 +1,38 @@
+model_version: 1.0
+board:
+  id: scrum-sprint
+  name: Sprint Board
+  type: kanban
+  description: Sprint execution board mapped to the Scrum workflow.
+  workflow: scrum
+columns:
+  - key: backlog
+    name: Sprint Backlog
+    states: [sprint_backlog]
+    color: info
+  - key: in-progress
+    name: In Progress
+    states: [in_progress]
+    wip_limit: 10
+    color: primary
+  - key: review
+    name: Review
+    states: [review]
+    wip_limit: 5
+    color: warning
+  - key: done
+    name: Done
+    states: [done]
+    color: success
+card_template:
+  size: compact
+  fields:
+    primary:
+      - title
+      - assignee
+    secondary:
+      - story_points
+      - due_date
+  badges:
+    - type: priority
+    - type: comments_count

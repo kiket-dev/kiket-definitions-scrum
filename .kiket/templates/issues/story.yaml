@@ -1,0 +1,22 @@
+model_version: 1.0
+template:
+  key: scrum_story
+  name: Sprint Story
+  scope: project
+  defaults:
+    issue_type: UserStory
+    status: sprint_backlog
+    priority: medium
+    custom_fields:
+      sprint_goal_alignment: medium
+  required_fields:
+    - description
+    - story_points
+  fields:
+    sprint_goal_alignment:
+      type: enum
+      label: Sprint Goal Alignment
+      options: [low, medium, high]
+    story_points:
+      type: number
+      label: Story Points
