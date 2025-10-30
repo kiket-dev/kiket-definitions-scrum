@@ -1,0 +1,25 @@
+model_version: "1.0"
+dashboard:
+  id: delivery-health
+  name: Delivery Health
+  description: Cycle time and throughput metrics refreshed by dbt.
+  widgets:
+    - id: cycle-time-trend
+      type: timeseries
+      title: Cycle Time (Days)
+      query: project-cycle-time
+      visualization:
+        x: completed_on
+        y: avg_cycle_days
+        series: project_id
+    - id: throughput-kpi
+      type: kpi
+      title: Issues Completed (Last 7 Days)
+      query: project-throughput
+      options:
+        window: 7d
+  alerts:
+    - query: project-cycle-time
+      condition: avg_cycle_days > 5
+      notify_roles:
+        - manager
