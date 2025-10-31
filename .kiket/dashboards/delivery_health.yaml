@@ -7,7 +7,17 @@ dashboard:
     - id: cycle-time-trend
       type: timeseries
       title: Cycle Time (Days)
-      query: project-cycle-time
+      query: fct_cycle_time
+      query_config:
+        model: fct_cycle_time
+        parameters:
+          - name: project_id
+            type: integer
+            required: true
+        filters:
+          project_id: ":project_id"
+        order_by:
+          - completed_on
       visualization:
         x: completed_on
         y: avg_cycle_days
@@ -15,11 +25,29 @@ dashboard:
     - id: throughput-kpi
       type: kpi
       title: Issues Completed (Last 7 Days)
-      query: project-throughput
+      query: fct_throughput
+      query_config:
+        model: fct_throughput
+        parameters:
+          - name: project_id
+            type: integer
+            required: true
+        filters:
+          project_id: ":project_id"
+        order_by:
+          - completed_on
       options:
         window: 7d
   alerts:
-    - query: project-cycle-time
+    - query: fct_cycle_time
+      query_config:
+        model: fct_cycle_time
+        parameters:
+          - name: project_id
+            type: integer
+            required: true
+        filters:
+          project_id: ":project_id"
       condition: avg_cycle_days > 5
       notify_roles:
         - manager
