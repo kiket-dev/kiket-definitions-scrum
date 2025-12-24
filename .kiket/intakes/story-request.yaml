@@ -1,0 +1,109 @@
+# Story Request Intake Form
+# Form for stakeholders to submit user stories
+
+model_version: "1.0"
+
+intake_form:
+  key: story-request
+  name: Story Request
+  slug: story-request
+  description: Submit a new user story or feature request for the backlog
+
+  settings:
+    public: true
+    captcha_enabled: true
+    rate_limit: 20
+    requires_approval: true
+    default_issue_type: story
+    default_priority: medium
+    confirmation_message: |
+      Your story has been submitted for review. The product owner
+      will evaluate it for the backlog.
+
+  fields:
+    - key: title
+      type: string
+      label: Story Title
+      required: true
+      placeholder: As a [user], I want to [action]...
+      maps_to: title
+      helper_text: Use the user story format if possible
+
+    - key: user_role
+      type: string
+      label: User Role
+      required: true
+      placeholder: e.g., admin, customer, team member
+      helper_text: Who is the primary user for this story?
+
+    - key: description
+      type: text
+      label: Story Description
+      required: true
+      placeholder: |
+        As a [type of user],
+        I want [some goal]
+        so that [some reason].
+      maps_to: description
+
+    - key: acceptance_criteria
+      type: text
+      label: Acceptance Criteria
+      required: true
+      placeholder: |
+        - Given [context], when [action], then [outcome]
+        - User can...
+        - System should...
+      helper_text: How will we know this story is complete?
+
+    - key: business_value
+      type: enum
+      label: Business Value
+      required: true
+      options:
+        values:
+          - value: must_have
+            label: Must Have - Critical for release
+          - value: should_have
+            label: Should Have - Important but not critical
+          - value: could_have
+            label: Could Have - Nice to have
+          - value: wont_have
+            label: Won't Have - Future consideration
+
+    - key: epic
+      type: string
+      label: Related Epic
+      required: false
+      placeholder: Epic name or ID if known
+
+    - key: stakeholder_name
+      type: string
+      label: Your Name
+      required: true
+      placeholder: Your full name
+
+    - key: stakeholder_email
+      type: email
+      label: Your Email
+      required: true
+      placeholder: you@company.com
+
+    - key: department
+      type: enum
+      label: Department
+      required: false
+      options:
+        values:
+          - value: product
+            label: Product
+          - value: engineering
+            label: Engineering
+          - value: sales
+            label: Sales
+          - value: marketing
+            label: Marketing
+          - value: support
+            label: Customer Support
+          - value: other
+            label: Other

@@ -1,0 +1,120 @@
+# Bug Report Intake Form for Scrum
+# Public form for reporting bugs to be triaged into sprints
+
+model_version: "1.0"
+
+intake_form:
+  key: bug-report
+  name: Bug Report
+  slug: bug-report
+  description: Report a bug for triage and sprint planning
+
+  settings:
+    public: true
+    captcha_enabled: true
+    rate_limit: 15
+    requires_approval: false
+    default_issue_type: bug
+    default_priority: high
+    confirmation_message: |
+      Bug report received! It will be triaged and prioritized
+      for an upcoming sprint.
+
+  fields:
+    - key: title
+      type: string
+      label: Bug Summary
+      required: true
+      placeholder: Brief description of the bug
+      maps_to: title
+
+    - key: severity
+      type: enum
+      label: Severity
+      required: true
+      options:
+        values:
+          - value: blocker
+            label: Blocker - Prevents all work
+          - value: critical
+            label: Critical - Major functionality broken
+          - value: major
+            label: Major - Significant impact
+          - value: minor
+            label: Minor - Low impact
+          - value: trivial
+            label: Trivial - Cosmetic issue
+
+    - key: affected_area
+      type: string
+      label: Affected Area
+      required: true
+      placeholder: e.g., Login, Dashboard, API
+
+    - key: description
+      type: text
+      label: Description
+      required: true
+      placeholder: Detailed description of the bug
+      maps_to: description
+
+    - key: steps
+      type: text
+      label: Steps to Reproduce
+      required: true
+      placeholder: |
+        1. Navigate to...
+        2. Click on...
+        3. Observe...
+
+    - key: expected
+      type: text
+      label: Expected Result
+      required: true
+      placeholder: What should happen?
+
+    - key: actual
+      type: text
+      label: Actual Result
+      required: true
+      placeholder: What actually happens?
+
+    - key: frequency
+      type: enum
+      label: Frequency
+      required: false
+      options:
+        values:
+          - value: always
+            label: Always reproducible
+          - value: often
+            label: Often (>50% of the time)
+          - value: sometimes
+            label: Sometimes (<50% of the time)
+          - value: rarely
+            label: Rarely (hard to reproduce)
+          - value: once
+            label: Happened once
+
+    - key: environment
+      type: string
+      label: Environment
+      required: false
+      placeholder: OS, Browser, Version
+
+    - key: attachments
+      type: file
+      label: Screenshots / Logs
+      required: false
+      options:
+        allowed_types:
+          - image/*
+          - text/*
+        max_size_mb: 10
+        max_files: 5
+
+    - key: reporter_email
+      type: email
+      label: Your Email
+      required: false
+      placeholder: you@example.com
