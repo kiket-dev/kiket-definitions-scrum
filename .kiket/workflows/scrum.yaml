@@ -40,6 +40,22 @@ states:
       icon: 🔍
       description: Awaiting demo or QA.
     wip_limit: 5
+    sla:
+      warning: 24h
+      breach: 48h
+      business_hours: true
+      on_warning:
+        - action: notify
+          recipients:
+            user: assignee
+          message: "{{issue.title}} approaching SLA in Review"
+      on_breach:
+        - action: notify
+          recipients:
+            user: assignee
+            roles: [manager]
+          message: "SLA BREACH: {{issue.title}} exceeded 48h in Review"
+          level: critical
   done:
     type: final
     category: completed
