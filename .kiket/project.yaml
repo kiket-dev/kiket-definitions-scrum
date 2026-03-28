@@ -1,0 +1,77 @@
+model_version: "1.0"
+project:
+  key: SCRUM
+  name: Scrum Development
+  version: 1.0.0
+  description: Sprint-based workflow with planning and review gates.
+
+  team:
+    roles:
+      - name: developer
+        description: Software developer delivering sprint commitments
+      - name: scrum_master
+        description: Scrum master facilitating ceremonies and removing blockers
+      - name: product_owner
+        description: Product owner managing backlog and priorities
+
+  extensions:
+    required:
+      - github
+    optional:
+      - slack
+
+  seed_data:
+    issues:
+      - title: Build SSO login flow with SAML 2.0
+        description: Enterprise customers need single sign-on. Implement SAML 2.0 identity provider integration with attribute mapping.
+        issue_type: UserStory
+        status: in_progress
+        priority: high
+        labels:
+          - authentication
+          - enterprise
+
+      - title: Spike on real-time collaboration architecture
+        description: Research WebSocket vs SSE approaches for real-time board updates when multiple users edit the same board.
+        issue_type: Spike
+        status: sprint_backlog
+        priority: medium
+        labels:
+          - research
+          - architecture
+
+      - title: Search indexing fails silently for large attachments
+        description: Files over 25 MB are not indexed but no error is surfaced to users or logged to monitoring.
+        issue_type: Bug
+        status: review
+        priority: high
+        labels:
+          - search
+          - bug
+
+      - title: Create API rate limiting middleware
+        description: Add per-tenant rate limiting to the public API to prevent abuse and ensure fair usage across customers.
+        issue_type: UserStory
+        status: in_progress
+        priority: critical
+        labels:
+          - api
+          - security
+
+      - title: Add sprint velocity chart to analytics dashboard
+        description: Display a rolling velocity chart showing story points completed per sprint over the last 8 sprints.
+        issue_type: UserStory
+        status: backlog
+        priority: medium
+        labels:
+          - analytics
+          - dashboard
+
+      - title: Upgrade PostgreSQL driver to support SCRAM-SHA-256
+        description: Cloud SQL now defaults to SCRAM authentication. Upgrade pg gem and connection config to support it.
+        issue_type: Task
+        status: done
+        priority: medium
+        labels:
+          - infrastructure
+          - database
